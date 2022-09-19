@@ -1,0 +1,26 @@
+{
+  "name": "mir-topv24-udemy-backend",
+  "description": "udemy clone back-end",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BorisLeightonI/MiR-TopV24-Udemy-BackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BorisLeightonI/MiR-TopV24-Udemy-BackEnd/issues"
+  },
+  "homepage": "https://github.com/BorisLeightonI/MiR-TopV24-Udemy-BackEnd#readme"
+}
