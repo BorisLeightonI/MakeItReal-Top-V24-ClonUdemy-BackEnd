@@ -10,4 +10,6 @@
 - nodemon como devDependencies ```npm i nodemon -D```
 - agregar a devDependencies ```"dev": "nodemon src/index.js"```
 
+## first CRUD
 
+para id randoms ```npm i uuid-random```
