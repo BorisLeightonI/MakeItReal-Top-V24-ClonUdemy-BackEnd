@@ -1,102 +1,83 @@
- const crypto = require('crypto');
+//logica para almacenar los datos
+const User = require('./user.model');
 
- const {
-   createUser,
-   getAllUser,
-   getSingleUser,
-   updateUser,
-   deleteUser,
- } = require('./user.service');
- const { sendMailSendGrid } = require('../../utils/mail');
+const { update } = require("./user.model")
 
- async function getAllUserHandler(req, res) {
-   try {
-     const users = await getAllUser();
-     return res.status(200).json(users);
-   } catch (error) {
-     return res.status(500).json({ error });
-   }
- }
 
- async function getSingleUserHandler(req, res) {
-   const { id } = req.params;
-   try {
-     const user = await getSingleUser(id);
+module.exports = {
+  //GET - list
+  //GET:id - Show
+  //POST - create
+  //PUT - update
+  //DELETE - destroy
 
-     if (!user) {
-       return res.status(404).json({ message: 'User not found' });
-     }
 
-     const { profile } = user;
+  // GET
+  list(req, res) {
+    User.find()
+      .then((User) => {
+        res.status(200).json({ message: "User found", data: user })
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "User not found", data: err })
+      })
+  },
 
-     return res.json(profile);
-   } catch (error) {
-     return res.status(500).json({ error });
-   }
- }
+  // GET:id
+  show(req, res) {
+    const { userId } = req.params
 
- async function createUserHandler(req, res) {
-   const userData = req.body;
+    User.findById(userId)
+      .then((user) => {
+        res.status(200).json({ message: "user found", data: user })
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "user not found", data: err })
+      })
 
-   try {
-     const hash = crypto.createHash('sha256')
-       .update(userData.email)
-       .digest('hex');
+  },
 
-     userData.passwordResetToken = hash;
-     userData.passwordResetExpires = Date.now() + 3_600_000 * 24; // 24 hour
 
-     const user = await createUser(userData);
-     // Send email to user
-     const message = {
-       from: '"no-reply" <cristian.moreno@makeitreal.camp>', // sender address
-       to: user.email, // list of receivers
-       subject: 'Activate account Template', // Subject line
-       template_id: 'd-649011f35b854690a0e5f47de11eb2f2', // template id
-       dynamic_template_data: {
-         firstName: user.profile.firstName.toUpperCase(),
-         lastName: user.profile.lastName.toUpperCase(),
-         url: `${process.env.FRONTEND_URL}/verify-account/${hash}`,
-       },
-     };
+  //POST-create
+create(req, res) {
+  const data = req.body
 
-     await sendMailSendGrid(message);
+  const newUser = {
+    ...data,
+  }
 
-     return res.status(201).json(user);
-   } catch (error) {
-     return res.status(500).json({ error });
-   }
- }
+  User.create(newUser)
+    .then((user) => {
+      res.status(201).json({ message: "user created", data: user })
+    })
+    .catch((err) => {
+      res.status(400).json({ message: "user could not be created", data: err })
+    })
+},
 
- async function updateUserHandler(req, res) {
-   const { id } = req.params;
-   const userData = req.body;
+  // PUT:id
+  update(req, res) {
+    const { userId } = req.params
 
-   try {
-     const user = await updateUser(id, userData);
+    User.findByIdAndUpdate(userId, req.body, { new: true })
+      .then((user) => {
+        res.status(200).json({ message: "user updated", data: user })
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "user could not be updated", data: err })
+      })
+  },
 
-     return res.status(200).json(user);
-   } catch (error) {
-     return res.status(500).json({ error });
-   }
- }
+  // DELETE:id
+  destroy(req, res) {
+    const { userId } = req.params
 
- async function deleteUserHandler(req, res) {
-   const { id } = req.params;
-
-   try {
-     await deleteUser(id);
-
-     return res.status(200).json(null);
-   } catch (error) {
-     return res.status(500).json(error);
-   }
- }
-
- module.exports = {
-   getAllUserHandler,
-   getSingleUserHandler,
-   createUserHandler,
-   updateUserHandler,
-   deleteUserHandler,
- };
+    User.findByIdAndDelete(userId)
+      .then((user) => {
+        res.status(200).json({ message: "user deleted", data: user })
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "user could not be deleted", data: err })
+      })
+  }
+}
