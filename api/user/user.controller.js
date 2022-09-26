@@ -5,11 +5,6 @@ const { update } = require("./user.model")
 
 
 module.exports = {
-  //GET - list
-  //GET:id - Show
-  //POST - create
-  //PUT - update
-  //DELETE - destroy
 
 
   // GET

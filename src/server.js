@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors')
 const { connect } = require("./db")
 const userRoute = require('../api/user/user.routes')
+const studentRoute = require('../api/student/student.routes')
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -17,3 +18,4 @@ app.listen(port, () => {
 
 /* endpoints / routes */
 app.use("/user", userRoute)
+app.use('/student', studentRoute)
