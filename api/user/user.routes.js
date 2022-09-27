@@ -1,19 +1,10 @@
-const Router = require('express');
+const router = require("express").Router();
+const userController = require("./user.controller");
 
-const {
-  createUserHandler,
-  deleteUserHandler,
-  getAllUserHandler,
-  getSingleUserHandler,
-  updateUserHandler,
-} = require('./user.controller');
-
-const router = Router();
-
-router.get('/', getAllUserHandler);
-router.post('/', createUserHandler);
-router.get('/:id', getSingleUserHandler);
-router.patch('/:id', updateUserHandler);
-router.delete('/:id', deleteUserHandler);
+router.route("/").post(userController.create)
+router.route("/").get(userController.list)
+router.route("/:userId").get(userController.show)
+router.route("/:userId").put(userController.update)
+router.route("/:userId").delete(userController.destroy)
 
 module.exports = router;
