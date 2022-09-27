@@ -30,10 +30,10 @@ const studentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  studentcourses : [{
-    type: Schema.Types.ObjectId,
+  studentcourses : {
+    type: String,
     ref: 'course'
-  }],
+  },
   payment: [],
 }, { timestamps: true })
 

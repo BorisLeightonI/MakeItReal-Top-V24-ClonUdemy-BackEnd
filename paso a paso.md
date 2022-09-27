@@ -25,3 +25,5 @@ instalar morgan para leer errores en consola ```npm i morgan --save```
 instalar un paquete para el hash de la clave como bycript.js ```npm install bcryptjs```
 
 instalar cross origin resource sharing CORS ```npm i cors```
+
+instalar para mongoose paginate v2 ```npm install mongoose-paginate-v2```
