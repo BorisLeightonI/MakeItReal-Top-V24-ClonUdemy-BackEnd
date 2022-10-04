@@ -27,3 +27,16 @@ instalar un paquete para el hash de la clave como bycript.js ```npm install bcry
 instalar cross origin resource sharing CORS ```npm i cors```
 
 instalar para mongoose paginate v2 ```npm install mongoose-paginate-v2```
+
+## Documentación con swagger
+- npm i swagger-ui-express swagger
+
+## Autenticación  / auth
+
+no ide sino en el Header un token del usuario
+
+bccrypt y jsonweb token 
+
+```npm i bcrypt jsonwebtoken```
+
+en src crear carpeta utils con auth.js 

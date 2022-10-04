@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const {mongoose, model, Schema, models }= require('mongoose');
 
 const studentSchema = new mongoose.Schema({
   username: {
@@ -12,6 +12,17 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    validate : {
+      async validator(email) {
+        try {
+          const student = await models.student.findOne({email});
+          return !student
+        } catch (error) {
+          return false
+        }
+      },
+      message: "Email allready exist"
+    }
    },
   password: {
     type: String,
@@ -30,13 +41,13 @@ const studentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  studentcourses : {
+  studentcourses : [{
     type: String,
     ref: 'course'
-  },
+  }],
   payment: [],
 }, { timestamps: true })
 
-const Student = mongoose.model('Student', studentSchema);
+const Student = mongoose.model('student', studentSchema);
 
 module.exports = Student;
