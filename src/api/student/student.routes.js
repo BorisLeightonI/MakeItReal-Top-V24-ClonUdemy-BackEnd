@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const studentController = require('./student.controller');
+// const { auth } = require('../../utils/auth')
 
 router.route('/').post(studentController.signup);
-
 
 // router.route('/').post(studentController);
 // router.route("/").get(studentController.list)

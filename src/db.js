@@ -6,7 +6,7 @@ function connect() {
   mongoose.connect(mongoUri)
 
   mongoose.connection.once("open", () => {
-    console.log("✅ Connected to mongo data base from db.js!")
+    console.log("✅ Connected to mongo data base!")
   })
 
   mongoose.connection.on("error", (err) => {

@@ -1,4 +1,5 @@
 const Student = require('./student.model');
+const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
 
 
@@ -21,9 +22,10 @@ module.exports = {
       res.status(201).json({ token:token, message: "✅student created" })
 
     } catch (error) {
-      res.status(400).json({ message: "❌student could NOT be created"})
+      res.status(400).json({ message: "student could NOT be created"})
     }
   },
+
   //signin/login
   async login(req, res) {
     try {
