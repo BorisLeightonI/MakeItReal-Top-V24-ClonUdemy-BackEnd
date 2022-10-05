@@ -12,15 +12,13 @@ module.exports = {
 
       const encriptedPassord = await bcrypt.hash(password, 11)
       const student = await Student.create({ fullname:fullname, email:email, password:encriptedPassord })
-      console.log(`student created: ${student}`)
 
       const token  = jwt.sign(
         { id: student._id},
           process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}//one day
       )
-      res.status(201).json({ token:token, message: "✅student created" })
-
+      res.status(201).json({ info: { token, email, fullname}, message: "✅student created" })
     } catch (error) {
       res.status(400).json({ message: "student could NOT be created"})
     }

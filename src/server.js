@@ -10,7 +10,9 @@ const app = express();
 const port = process.env.PORT || 8080;
 connect();
 
-app.use(express.json(), morgan('tiny'),cors())
+app.use(express.json())
+app.use(morgan('tiny'))
+app.use(cors())
 
 applicationRoutes(app)
 
