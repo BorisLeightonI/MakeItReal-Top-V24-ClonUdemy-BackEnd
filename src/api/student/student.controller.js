@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 
 module.exports = {
-
+/* signup */
   async signup (req, res) {
     try {
       const { fullname, email, password } = req.body
@@ -20,25 +20,25 @@ module.exports = {
       )
       res.status(201).json({ info: { token, email, fullname}, message: "✅student created" })
     } catch (error) {
-      res.status(400).json({ message: "student could NOT be created"})
+      res.status(400).json({ message: `Student could NOT be created ${error}`})
     }
   },
 
-  //signin/login
+/* login */
   async login(req, res) {
     try {
       const { email, password } = req.body
 //validate email
       const student = await Student.find({ email })
       if(!student){
-        throw new Error('invalid credentials')
+        throw new Error({message:`invalid credentials`})
       }
       //validate password
         //compare 2 arguments 1 password and hashed password
       const isValid = await bcrypt.compare( password, student.password)
 
       if(!isValid){
-        throw new error('invalid credentials')
+        throw new error({message:`invalid credentials`})
       }
 
       const token  = jwt.sign(
@@ -50,7 +50,7 @@ module.exports = {
       res.status(201).json({  message: "student loged in" })
 
     } catch (error) {
-      res.status(400).json({ message: "student could not login"})
+      res.status(400).json({ message: `student could not login ${error}`})
     }
   },
 

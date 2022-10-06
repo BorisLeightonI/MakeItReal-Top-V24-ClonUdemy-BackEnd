@@ -35,8 +35,12 @@ instalar para mongoose paginate v2 ```npm install mongoose-paginate-v2```
 
 no ide sino en el Header un token del usuario
 
-bccrypt y jsonweb token 
+bccrypt y jsonweb token
 
 ```npm i bcrypt jsonwebtoken```
 
-en src crear carpeta utils con auth.js 
+en src crear carpeta utils con auth.js
+
+## Carga de imagenes
+instalar busboy
+```npm i cloudinary busboy```
