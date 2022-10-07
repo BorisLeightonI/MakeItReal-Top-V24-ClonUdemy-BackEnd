@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-   },
+  },
   password: {
     type: String,
     required: true,
@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     default: '',
   },
   isTeacher: {
-    type: Bolean,
+    type: Boolean,
     default: false
   },
   isLogged: {
@@ -51,6 +51,6 @@ const UserSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('user', UserSchema);
 
 module.exports = User;
