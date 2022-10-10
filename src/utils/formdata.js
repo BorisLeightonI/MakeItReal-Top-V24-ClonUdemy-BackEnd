@@ -36,7 +36,7 @@ formData = (req, res, next) => {
     uploadingFile = true
     uploadingCount++
     const cloud = cloudinary.uploader.upload_stream(
-      { upload_preset: "XXXXXXXX" },// needs setup
+      { upload_preset: process.env.CLOUDINARY_PRESET },// needs setup
       (err, res) => {
         if (err) throw new Error(`Error in file capture: ${err}`)
 
