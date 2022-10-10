@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  isLogged: {
+  isInstructor: {
     type: Boolean,
     default: false,
   },
