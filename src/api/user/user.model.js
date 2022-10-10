@@ -23,14 +23,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  isTeacher: {
-    type: Boolean,
-    default: false
-  },
-  isInstructor: {
-    type: Boolean,
-    default: false,
-  },
   payment: {
     type: String,
     ref: 'payment'
@@ -46,7 +38,7 @@ const UserSchema = new mongoose.Schema({
       type: String,
       ref : 'course'
     }
-  ],//todo lo anterior es comun a ambos teacher y student // si es estudiante datos de teacher null
+  ],
   teacherDescription:{
     type: String,
   },
