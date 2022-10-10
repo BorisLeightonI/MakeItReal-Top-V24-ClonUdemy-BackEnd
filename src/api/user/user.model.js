@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  fullname: {
+  fullName: {
     type: String,
     required: true,
   },
@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-   },
+  },
   password: {
     type: String,
     required: true,
@@ -19,18 +19,38 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  role: {
-    type: String,
-    enum: ['user', 'student','teacher', 'admin'],
-    default: 'user',
+  isTeacher: {
+    type: Boolean,
+    default: false
   },
-  isActive: {
+  isLogged: {
     type: Boolean,
     default: false,
   },
-  payment: [],
+  payment: {
+    type: String,
+    ref: 'payment'
+  },
+  teacherCourses:[
+    {
+      type: String,
+      ref: 'course'
+    }
+  ],
+  studentCourses: [
+    {
+      type: String,
+      ref : 'course'
+    }
+  ],//todo lo anterior es comun a ambos teacher y student // si es estudiante datos de teacher null
+  teacherDescription:{
+    type: String,
+  },
+  position:{
+    type: String
+  },
 }, { timestamps: true });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('user', UserSchema);
 
 module.exports = User;

@@ -27,6 +27,12 @@ const teacherSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  courses: [
+    {
+    type: String,
+    ref: 'course'
+    }
+  ],
   payment: [],
 }, { timestamps: true });
 
