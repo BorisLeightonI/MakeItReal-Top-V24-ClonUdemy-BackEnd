@@ -17,13 +17,13 @@ const classSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Course'
   },
-  active:{
+  isActive:{
     type: Boolean,
     default: true,
   },
   owner :{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Teacher'
+    ref: 'User'
   },
   classOfCourse:{
     type: mongoose.Schema.Types.ObjectId,

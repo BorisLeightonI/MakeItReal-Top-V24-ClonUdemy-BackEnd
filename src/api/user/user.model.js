@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
+  isInstructor: {
+    type: Boolean,
+    default: false
+  },
   fullName: {
     type: String,
     required: true,
@@ -15,15 +19,15 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
-  isInstructor: {
-    type: Boolean,
-    default: false
-  },
   avatar: {
     type: String,
     default: '',
   },
-  isLogged: {
+  isTeacher: {
+    type: Boolean,
+    default: false
+  },
+  isInstructor: {
     type: Boolean,
     default: false,
   },
