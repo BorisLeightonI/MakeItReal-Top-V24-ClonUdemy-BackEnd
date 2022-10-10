@@ -15,13 +15,13 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
+  isInstructor: {
+    type: Boolean,
+    default: false
+  },
   avatar: {
     type: String,
     default: '',
-  },
-  isTeacher: {
-    type: Boolean,
-    default: false
   },
   isLogged: {
     type: Boolean,
