@@ -6,7 +6,7 @@ module.exports = {
 /* signup */
   async signup (req, res) {
     try {
-      const { fullName, email, password, } = req.body
+      const { fullName, email, password } = req.body
 
       const encriptedPassord = await bcrypt.hash(password, 11)
       const user = await User.create({ fullName:fullName, email:email, password:encriptedPassord, isInstructor:true })
