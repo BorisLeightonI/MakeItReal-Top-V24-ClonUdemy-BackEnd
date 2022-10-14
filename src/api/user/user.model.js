@@ -29,13 +29,13 @@ const UserSchema = new mongoose.Schema({
   },
   teacherCourses:[
     {
-      type: String,
-      ref: 'course'
+      type: [{type: mongoose.Schema.Types.ObjectId, ref: 'course'}],
+      required: false
     }
   ],
   studentCourses: [
     {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref : 'course'
     }
   ],

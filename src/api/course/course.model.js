@@ -18,7 +18,7 @@ const courseSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    // required: true,
   },
   language: {
     type: String,
