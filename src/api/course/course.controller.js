@@ -24,7 +24,7 @@ try {
 
 }
 
-const createBlancCourse = (req, res) => {
+const createBlankCourse = (req, res) => {
   Course.create(req.body)
     .then( course => res.status(200).json({message: 'Unrelated Course created succesfully', data: course}))
     .catch( err => res.status(400).json({message: 'it could not be created', data: err}))
@@ -71,7 +71,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   //course CRUD
-  create, createBlancCourse,
+  create, createBlankCourse,
   show, list,
   update,
   destroy

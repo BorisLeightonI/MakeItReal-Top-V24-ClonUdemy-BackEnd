@@ -24,7 +24,7 @@ try {
 
 }
 
-const createBlancClass = (req, res) => {
+const createBlankClass = (req, res) => {
   _Class.create(req.body)
     .then( _class => res.status(200).json({message: 'Unrelated class created succesfully', data: _class}))
     .catch( err => res.status(400).json({message: 'it could not be created', data: err}))
@@ -77,7 +77,7 @@ module.exports = {
   // 3 push al modelo de course
   // 4 confirmar cambio con save de mongoose al modelo de curso
   // para cambiar info de un curso put con el id de clase
-  create, createBlancClass,
+  create, createBlankClass,
   show, list,
   update,
   destroy
