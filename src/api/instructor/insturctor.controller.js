@@ -16,7 +16,7 @@ module.exports = {
         process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}//one day
       )
-      res.status(201).json({ info: { token, email, fullName}, message: "✅Instructor created" })
+      res.status(201).json({ message: "✅Instructor created", info: { token, email, fullName } })
     } catch (error) {
       res.status(400).json({ message: `❌Instructor could NOT be created ${error}`})
     }

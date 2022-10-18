@@ -18,7 +18,7 @@ module.exports = {
         process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}//one day
       )
-      res.status(201).json({ info: { token, email, fullName}, message: "✅user created" })
+      res.status(201).json({ message: "✅user created", info: { token, email, fullName} })
     } catch (error) {
       res.status(400).json({ message: `❌user could NOT be created ${error}`})
     }
@@ -27,30 +27,31 @@ module.exports = {
   /* login */
   async login(req, res) {
     try {
-      const { email, password } = req.body
+      const { email, password } = req.body;
       //validate email
-      const user = await User.find({ email })
+      const user = await User.findOne({ email });console.log()
+
       if(!user){
-        throw new Error({message:`invalid credentials`})
+        throw new Error(`invalid credentials`)
       }
       //validate password
       //compare 2 arguments 1 password and hashed password
-      const isValid = await bcrypt.compare( password, user.password)
+      const isValid = await bcrypt.compare( password, user.password);
 
       if(!isValid){
-        throw new error({message:`invalid credentials`})
+        throw new Error(`invalid credentials`)
       }
 
       const token  = jwt.sign(
-        { id: student._id},
+        { id: user._id},
         process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}
       )
 
-      res.status(201).json({  message: "✅user logged in" })
+      res.status(200).json({  message: "✅user logged in", data:{email, token} })
 
     } catch (error) {
-      res.status(400).json({ message: `❌student could not login ${error}`})
+      res.status(400).json(`❌user could not login: ${error}`)
     }
   },
 }
