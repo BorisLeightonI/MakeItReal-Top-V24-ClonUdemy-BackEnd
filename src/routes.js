@@ -6,7 +6,7 @@ const classRoute = require('./api/class/class.routes')
 const mediaRoute = require('./api/multimedia/media.routes');
 
 function routes(app) {
-  app.use('/user', userRoute);
+  app.use('/users', userRoute);
   app.use('/instructor', instructorRoute);
   app.use('/course', courseRoute);
   app.use('/class', classRoute)
