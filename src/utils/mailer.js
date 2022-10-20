@@ -11,10 +11,14 @@ exports.transporter = nodemailer.createTransport({
 })
 
 exports.verify = async (transporter) => {
-  const connection = await transporter.verify()
+  try {
+    const connection = await transporter.verify()
+    if (connection) {
+      console.log("✅ Server is ready to take our mail messages")
+    }
 
-  if (connection) {
-    console.log("Server is ready to take our messages")
+  } catch (error) {
+    console.log(`❌ something wrong in mail connection ${error}`)
   }
 }
 
@@ -26,7 +30,7 @@ exports.welcome = (user) => {
     html: `
       <div>
         <h1> Welcome ${user.fullName}</h1>
-      </div>   
+      </div>
     `,
     text: `Welcome ${user.fullName}`
   }
