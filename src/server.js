@@ -1,6 +1,6 @@
 const express = require("express");
-//require("dotenv").config(); /*Solo se usa en Local no en producción*/
-// const morgan = require('morgan');
+require("dotenv").config(); /*Solo se usa en Local no en producción*/
+const morgan = require('morgan');
 const cors = require('cors')
 const { connect } = require("./db")
 const applicationRoutes = require('./routes')
@@ -19,7 +19,7 @@ connect();
 })) */
 app.use(cors())
 app.use(express.json())
-// app.use(morgan('tiny'))
+app.use(morgan('tiny'))
 verify(transporter)
 
 applicationRoutes(app)
@@ -28,4 +28,4 @@ app.listen(port, () => {
   console.log(`✅ Server listening on port ${port}!`)
 })
 
-/// hola yo soy un comentario para borrar
+// intento dos
