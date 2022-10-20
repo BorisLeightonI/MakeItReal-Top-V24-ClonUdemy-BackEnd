@@ -24,7 +24,8 @@ app.use(cors({
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://mir-top-v24-udemy-front-end.vercel.app");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-Width, Content-Type, Accept, Authorization, x-content-type-options');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
 });
 
