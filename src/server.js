@@ -14,7 +14,12 @@ verify(transporter)
 
 app.use(express.json())
 app.use(morgan('tiny'))
-app.use(cors())
+app.use(cors({
+  "origin": "https://mir-top-v24-udemy-front-end.vercel.app",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}))
 //{origin: 'https://mir-top-v24-udemy-front-end.vercel.app'}
 
 applicationRoutes(app)
