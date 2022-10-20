@@ -4,13 +4,13 @@ const morgan = require('morgan');
 const cors = require('cors')
 const { connect } = require("./db")
 const applicationRoutes = require('./routes')
-// const { transporter, verify } = require('./utils/mailer')
+const { transporter, verify } = require('./utils/mailer')
 
 
 const app = express();
 const port = process.env.PORT || 8080;
 connect();
-// verify(transporter)
+verify(transporter)
 
 app.use(express.json())
 app.use(morgan('tiny'))
