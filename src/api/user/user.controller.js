@@ -1,6 +1,7 @@
 const User = require('./user.model')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
+const { transporter, welcome } = require('../../utils/mailer');
 
 
 
@@ -12,7 +13,7 @@ module.exports = {
 
       const encriptedPassord = await bcrypt.hash(password, 11)
       const user = await User.create({ fullName:fullName, email:email, password:encriptedPassord })
-
+      await transporter.sendMail(welcome(user))
       const token  = jwt.sign(
         { id: user._id},
         process.env.SECRET_KEY_JWT,
