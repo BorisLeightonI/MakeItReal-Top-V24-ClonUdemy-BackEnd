@@ -1,5 +1,5 @@
 const express = require("express");
-require("dotenv").config(); /*Solo se usa en Local no en producción*/
+//require("dotenv").config(); /*Solo se usa en Local no en producción*/
 const morgan = require('morgan');
 const cors = require('cors')
 const { connect } = require("./db")
