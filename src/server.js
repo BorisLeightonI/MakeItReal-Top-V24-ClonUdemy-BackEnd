@@ -14,16 +14,16 @@ verify(transporter)
 
 app.use(express.json())
 app.use(morgan('tiny'))
-app.use(cors({
+/* app.use(cors({
   "origin": "https://mir-top-v24-udemy-front-end.vercel.app",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
   "optionsSuccessStatus": 204
-}))
+})) */
 //{origin: 'https://mir-top-v24-udemy-front-end.vercel.app'}
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://mir-top-v24-udemy-front-end.vercel.app");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-Width, Content-Type, Accept, Authorization, x-content-type-options');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
