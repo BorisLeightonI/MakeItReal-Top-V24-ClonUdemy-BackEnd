@@ -11,7 +11,6 @@ exports.auth = (req, res, next) => {
 
     //Es para separar la palabra bearer del token
     const [_, token] = authorization.split(" ")
-
     // Para verificar que trae un token
     if (!token) {
       throw new Error("Su sesión expiró")

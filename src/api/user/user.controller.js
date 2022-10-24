@@ -51,7 +51,6 @@ module.exports = {
       )
       const {studentCourses, teacherCourses, isInstructor, fullName, avatar} = user
       res.status(200).json({  message: "✅user logged in", data:{email, studentCourses, teacherCourses, isInstructor, fullName, avatar, token} })
-
     } catch (error) {
       res.status(400).json(`❌user could not login: ${error}`)
     }
@@ -65,7 +64,6 @@ module.exports = {
       } 
       const {email, studentCourses, teacherCourses, isInstructor, fullName, avatar} = user
       res.status(200).json({  message: "✅user found", data:{email, studentCourses, teacherCourses, isInstructor, fullName, avatar} })
-
     } catch (error) {
       res.status(400).json({ message: "❌user is not authenticated", data: error })
     }
