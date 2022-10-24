@@ -18,7 +18,7 @@ module.exports = {
         process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}//one day
       )
-      res.status(201).json({ message: "✅user created", info: { token, email, fullName} })
+      res.status(201).json({ message: "✅user created", data: { token, email, fullName} })
     } catch (error) {
       console.log(error)
       res.status(400).json({ message: `❌user could NOT be created ${error}`})
@@ -31,7 +31,7 @@ module.exports = {
       const { email, password } = req.body;
       
       //validate email
-      const user = await User.findOne({ email });console.log()
+      const user = await User.findOne({ email });
 
       if(!user){
         throw new Error(`invalid credentials`)
@@ -49,8 +49,8 @@ module.exports = {
         process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}
       )
-      
-      res.status(200).json({  message: "✅user logged in", data:{email, token} })
+      const {studentCourses, teacherCourses, isInstructor, fullName, avatar} = user
+      res.status(200).json({  message: "✅user logged in", data:{email, studentCourses, teacherCourses, isInstructor, fullName, avatar, token} })
 
     } catch (error) {
       res.status(400).json(`❌user could not login: ${error}`)
@@ -60,11 +60,11 @@ module.exports = {
   async showSingleUser(req, res) {
     try {
       const user = await User.findById(req.user);
-      console.log('id:', req.user)
       if(!user){
         throw new Error("Token expired")
       } 
-      res.status(200).json({  message: "✅user found", data:user })
+      const {email, studentCourses, teacherCourses, isInstructor, fullName, avatar} = user
+      res.status(200).json({  message: "✅user found", data:{email, studentCourses, teacherCourses, isInstructor, fullName, avatar} })
 
     } catch (error) {
       res.status(400).json({ message: "❌user is not authenticated", data: error })
@@ -79,10 +79,9 @@ module.exports = {
       }
       user.isInstructor= true
       const instructorUser = await User.findByIdAndUpdate(req.user, user, { new: true } )
-      console.log(instructorUser)
-      res.status(200).json({  message: "✅user is now an instructor", data: instructorUser })
+      const {email, studentCourses, teacherCourses, isInstructor, fullName, avatar} = instructorUser
+      res.status(200).json({  message: "✅user is now an instructor", data: {email, studentCourses, teacherCourses, isInstructor, fullName, avatar} })
     } catch (error) {
-      console.log(error)
       res.status(400).json({ message: "❌user can't be an instructor", data: error })
     }
   }
