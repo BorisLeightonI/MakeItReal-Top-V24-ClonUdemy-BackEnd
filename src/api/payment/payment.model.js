@@ -1,4 +1,6 @@
-const Payment = new mongoose.Schema(
+const { model, Schema, models } = require('mongoose')
+
+const Payment = new Schema(
   {
     sendMoney: {
       userId: String,

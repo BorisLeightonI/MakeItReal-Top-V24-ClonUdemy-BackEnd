@@ -9,7 +9,7 @@ const list = (req, res) => {
   .then( courses => res.status(200).json({message: 'cursos ubicados exitosamente', data: courses}))
   .catch( err => res.status(200).json({message: 'no se pudo ubicar', data: err}))
 }
-
+//show a course by id
 const show = async (req, res) => {
 try {
   const { courseId } = req.params;

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const { model, Schema, models } = require('mongoose')
 
-const courseSchema = new mongoose.Schema(
+const courseSchema = new Schema(
   {
     title: {
       type: String,
@@ -64,12 +64,12 @@ const courseSchema = new mongoose.Schema(
       value: String
     }],
     courseOwner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     classes: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Class",
       },
     ],
@@ -84,6 +84,6 @@ const courseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Course = mongoose.model("Course", courseSchema);
+const Course = model("Course", courseSchema);
 
 module.exports = Course;
