@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const { model, Schema, models } = require('mongoose')
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   isInstructor: {
     type: Boolean,
     default: false
@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-   /*  validate: {
+    validate: {
       async validator(email) {
         try {
           const user = await models.user.findOne({ email })
@@ -23,7 +23,8 @@ const UserSchema = new mongoose.Schema({
         }
       },
       message: 'There is an user with this email that already exists'
-    }, */
+    },
+    
   },
   password: {
     type: String,
@@ -40,13 +41,13 @@ const UserSchema = new mongoose.Schema({
   },
   teacherCourses:[
     {
-      type: [{type: mongoose.Schema.Types.ObjectId, ref: 'course'}],
+      type: [{type: Schema.Types.ObjectId, ref: 'course'}],
       required: false
     }
   ],
   studentCourses: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref : 'course'
     }
   ],
@@ -58,6 +59,6 @@ const UserSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-const User = mongoose.model('user', UserSchema);
+const User = model('user', UserSchema);
 
 module.exports = User;

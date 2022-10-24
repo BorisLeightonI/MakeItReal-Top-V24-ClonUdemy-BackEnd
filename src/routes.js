@@ -7,9 +7,9 @@ const mediaRoute = require('./api/multimedia/media.routes');
 
 function routes(app) {
   app.use('/users', userRoute);
-  app.use('/instructor', instructorRoute);
-  app.use('/course', courseRoute);
-  app.use('/class', classRoute)
+  app.use('/instructors', instructorRoute);
+  app.use('/courses', courseRoute);
+  app.use('/classes', classRoute)
   app.use(mediaRoute);
 };
 
