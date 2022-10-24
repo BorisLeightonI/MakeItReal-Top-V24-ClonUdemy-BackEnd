@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const courseController = require('./course.controller');
+const { auth } = require('../../utils/auth');
 
-router.route("/:userId").post(courseController.create)
-router.route("/").post(courseController.createBlankCourse)
+router.route("/").post(auth, courseController.create)
+//router.route("/").post(courseController.createBlankCourse)
 router.route("/").get(courseController.list)
 router.route("/:courseId").get(courseController.show)
 router.route("/:courseId").put(courseController.update)

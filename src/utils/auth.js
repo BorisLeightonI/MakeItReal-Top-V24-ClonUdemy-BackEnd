@@ -4,7 +4,6 @@ exports.auth = (req, res, next) => {
   try {
     // En al back con minuculas en el front con mayuscula
     const { authorization } = req.headers
-    console.log('auth', authorization)
     //Para verificar el encabezado llega
     if (!authorization) {
       throw new Error("Su sesión expiró")
@@ -12,7 +11,7 @@ exports.auth = (req, res, next) => {
 
     //Es para separar la palabra bearer del token
     const [_, token] = authorization.split(" ")
-    
+
     // Para verificar que trae un token
     if (!token) {
       throw new Error("Su sesión expiró")
