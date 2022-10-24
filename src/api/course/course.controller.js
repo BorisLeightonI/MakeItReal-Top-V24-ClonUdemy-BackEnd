@@ -24,32 +24,22 @@ try {
 
 }
 
-const createBlankCourse = (req, res) => {
-  Course.create(req.body)
-    .then( course => res.status(200).json({message: 'Unrelated Course created succesfully', data: course}))
-    .catch( err => res.status(400).json({message: 'it could not be created', data: err}))
-}
-
 const create = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const user = await User.findById(req.user)
     const data = req.body;
+    if(!user) throw new Error('No existe Usuario');
+    const newCourse = {
+      ...data,
+      courseOwner: user._id
+    }
+    const course = await Course.create(newCourse);
+    user.teacherCourses.unshift(course);
+    await user.save({ validateBeforeSave: false })
 
-  const user = await User.findById(userId);
-  if(!user) throw new Error('No existe Usuario');
-
-  const newCourse = {
-    ...data,
-    courseOwner: userId
-  }
-
-  const course = await Course.create(newCourse);
-  user.teacherCourses.push(course);
-  await user.save();
-
-  res.status(200).json({message: 'curso creado exitosamente', data: course})
+    res.status(201).json({message: 'Curso creado exitosamente', data: course})
   } catch (err) {
-    res.status(400).json({message: 'no se pudo crear', data: err})
+    res.status(400).json({message: 'No se pudo crear el curso', data: err})
   }
 }
 
@@ -71,7 +61,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   //course CRUD
-  create, createBlankCourse,
+  create,
   show, list,
   update,
   destroy

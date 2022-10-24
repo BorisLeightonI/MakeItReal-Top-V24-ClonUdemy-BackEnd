@@ -6,48 +6,23 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
-    image: {
+    subtitle: {
       type: String,
-    },
-    avgRate: {
-      type: Number
-    },
-    students: {
-      type: Number,
-    },
-    price: {
-      type: Number,
-    },
-    currency: {
-      type: String
+      required: false
     },
     description: {
       type: String,
-    },
-    dateUpdated: {
-      type: Date,
-    },
-    totalHours: {
-      type: Number,
-    },
-    Level: {
-      type: String,
-      default: "All levels",
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
-    hasSubtitles: {
-      type: Boolean,
-      default: false,
-    },
-    youWill: {
-      type: [String],
+      required: true
     },
     language: {
       type: String,
-      default: "english",
+      enum: ['English(US)', 'Spanish(CO)'],
+      default: 'English(US)'
+    },
+    level: {
+      type: String,
+      enum: ['Beginner level', 'Intermediate level', 'Expert level', 'All levels'],
+      default: "All levels"
     },
     category: {
       type: String,
@@ -57,29 +32,44 @@ const courseSchema = new Schema(
         "Design",
         "Marketing",
         "Teaching & Academics",
-      ],
+      ]
     },
-    primaryTaught: [{//
-      id: String,
-      value: String
-    }],
-    courseOwner: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+    primaryTaught: {
+      type: String,
+      required: true
     },
+    image: {
+      type: String,
+      required: false
+    },
+    video: {
+      type: String,
+      required: false
+    },
+    learningObjectives: [{}],
+    requirements: [{}],
+    intendedLearners: [{}],
     classes: [
       {
         type: Schema.Types.ObjectId,
         ref: "Class",
       },
     ],
-    rating: {
+    price: {
       type: Number,
     },
-    isPurchased: {
-      type: Boolean,
-      default: false,
+    currency: {
+      type: String,
+      default: 'USD'
     },
+    courseOwner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    courseStudents: [{
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }]
   },
   { timestamps: true }
 );
