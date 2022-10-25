@@ -4,6 +4,7 @@ exports.auth = (req, res, next) => {
   try {
     // En al back con minuculas en el front con mayuscula
     const { authorization } = req.headers
+    console.log('auth llegó.', authorization)
     //Para verificar el encabezado llega
     if (!authorization) {
       throw new Error("Su sesión expiró")

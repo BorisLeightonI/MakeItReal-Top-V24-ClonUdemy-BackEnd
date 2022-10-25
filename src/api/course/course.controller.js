@@ -24,6 +24,7 @@ try {
 
 }
 
+/*create a course*/
 const create = async (req, res) => {
   try {
     const user = await User.findById(req.user)
