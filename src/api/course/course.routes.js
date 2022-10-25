@@ -5,8 +5,8 @@ const { auth } = require('../../utils/auth');
 router.route("/").post(auth, courseController.create)
 //router.route("/").post(courseController.createBlankCourse)
 router.route("/").get(courseController.list)
-router.route("/:courseId").get(courseController.show)
-router.route("/:courseId").put(courseController.update)
+router.route("/:courseId").get(auth, courseController.show)
+router.route("/:courseId").put(auth, courseController.update)
 router.route("/:courseId").delete(courseController.destroy)
 
 module.exports = router;
