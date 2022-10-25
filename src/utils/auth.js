@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
   try {
+    console.log('req:', req)
     // En al back con minuculas en el front con mayuscula
     const { authorization } = req.headers
     console.log('auth llegó.', authorization)
