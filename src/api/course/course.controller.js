@@ -21,11 +21,12 @@ const show = async (req, res) => {
   try {
     const { courseId } = req.params;
     const userId = req.user;
-    const course = await Course.findById(courseId);
-    console.log('user id ' , userId,'courseId', courseId)
+    console.log('show controller in course','user id:' , userId,'courseId:', courseId )
 
+    const course = await Course.findById(courseId).populate('classes', '_id classTitle classDescription classVideo classIsActive');
+          console.log('course controler', course)
     if (course.courseOwner.toString() !== userId) {
-      throw new Error("Course not found ,,");
+      throw new Error("Course not found (no match user id and owner id)");
     }
 
     res
@@ -33,8 +34,8 @@ const show = async (req, res) => {
       .json({ message: "✅ Course found :", data: course });
   } catch (error) {
     res
-      .status(200)
-      .json({ message: "no se pudo ubicar el curso", data: error });
+      .status(404)
+      .json({ message: "no se pudo ubicar el curso", data: error.message });
   }
 };
 
@@ -77,6 +78,7 @@ const update = async (req, res) => {
     res.status(400).json({ message: "❌ Course could NOT be updated", data: error.message });
   }
 };
+
 
 
 

@@ -3,7 +3,7 @@ const Course = require('../course/course.model');
 
 const list = (req, res) => {
   _Class.find()/* .populate({
-    path: 'user',
+    path: 'Course',
     select: 'fullName email payment'
   }) */
   .then( classes => res.status(200).json({message: 'clases ubicados exitosamente', data: classes}))
@@ -28,29 +28,29 @@ const createBlankClass = (req, res) => {
   _Class.create(req.body)
     .then( _class => res.status(200).json({message: 'Unrelated class created succesfully', data: _class}))
     .catch( err => res.status(400).json({message: 'it could not be created', data: err}))
-} 
+}
 
 const create = async (req, res) => {
   try {
   const { courseId } = req.params;
   const data = req.body;
-  
-  const course = await Course.findById(courseId);
-  if(!course) throw new Error('No existe Curso asociado');
 
-  const newCourse = {
+  const course = await Course.findById(courseId);
+  if(!course) throw new Error('No parent course associated ');
+
+  const newClass = {
     ...data,
     classOfCourse: courseId
   }
 
-  const _class = await _Class.create(newCourse);
+  const _class = await _Class.create(newClass);
   course.classes.push(_class);
-  await course.save();
+  await course.save({ validateBeforeSave: false });
 
-  res.status(200).json({message: 'Clase creada exitosamente', data: _class})
+  res.status(200).json({message: '✅Succesflull class creation ', data: _class})
   } catch (err) {
     console.log(err);
-    res.status(400).json({message: 'no se pudo crear', data: err})
+    res.status(400).json({message: '❌ Unsuccesflull class creation', data: err})
   }
 }
 
