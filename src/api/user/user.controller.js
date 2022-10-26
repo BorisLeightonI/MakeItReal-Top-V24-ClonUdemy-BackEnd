@@ -58,7 +58,11 @@ module.exports = {
   /* get single user by Id*/
   async showSingleUser(req, res) {
     try {
-      const user = await User.findById(req.user).populate('teacherCourses');
+      const user = await User.findById(req.user).populate({
+        path: 'teacherCourses',
+        select: 'title _id '
+      })
+
       if(!user){
         throw new Error("Token expired")
       }

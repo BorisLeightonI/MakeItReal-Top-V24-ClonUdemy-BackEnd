@@ -40,12 +40,12 @@ const UserSchema = new Schema(
       ref: "payment",
     },
     teacherCourses: {
-      type: [{ type: Schema.Types.ObjectId, ref: "course" }],
+      type: [{ type: Schema.Types.ObjectId, ref: "Course" }],
     },
     studentCourses: [
       {
         type: Schema.Types.ObjectId,
-        ref: "course",
+        ref: "Course",
       },
     ],
     teacherDescription: {
