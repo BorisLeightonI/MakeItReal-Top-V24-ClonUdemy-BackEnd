@@ -58,7 +58,7 @@ module.exports = {
   /* get single user by Id*/
   async showSingleUser(req, res) {
     try {
-      const user = await User.findById(req.user).populate({
+      const user = await User.findById(req.user).populate({//202210252229
         path: 'teacherCourses',
         select: 'title _id '
       })
