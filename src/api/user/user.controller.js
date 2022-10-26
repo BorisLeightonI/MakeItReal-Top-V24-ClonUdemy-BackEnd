@@ -29,7 +29,7 @@ module.exports = {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-      
+
       //validate email
       const user = await User.findOne({ email });
 
@@ -58,10 +58,10 @@ module.exports = {
   /* get single user by Id*/
   async showSingleUser(req, res) {
     try {
-      const user = await User.findById(req.user);
+      const user = await User.findById(req.user).populate('teacherCourses');
       if(!user){
         throw new Error("Token expired")
-      } 
+      }
       const {email, studentCourses, teacherCourses, isInstructor, fullName, avatar} = user
       res.status(200).json({  message: "✅user found", data:{email, studentCourses, teacherCourses, isInstructor, fullName, avatar} })
     } catch (error) {
