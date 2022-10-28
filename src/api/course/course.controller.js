@@ -1,7 +1,8 @@
 const Course = require("./course.model");
 const User = require("../user/user.model");
 
-const list = (req, res) => {
+const listAllCourses = (req, res) => {
+
   Course.find() /* .populate({
     path: 'courseOwner',
     select: 'fullName email payment'
@@ -9,10 +10,10 @@ const list = (req, res) => {
     .then((courses) =>
       res
         .status(200)
-        .json({ message: "cursos ubicados exitosamente", data: courses })
+        .json({ message: "cursos encontrados exitosamente", data: courses })
     )
     .catch((err) =>
-      res.status(200).json({ message: "no se pudo ubicar", data: err })
+      res.status(400).json({ message: "no se pudo ubicar", data: err })
     );
 };
 
@@ -38,6 +39,27 @@ const show = async (req, res) => {
       .json({ message: "no se pudo ubicar el curso", data: error.message });
   }
 };
+//show a course by id without auth
+
+{/*const showNoAuth = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+
+    const course = await Course.findById(courseId).populate('classes', '_id classTitle classDescription classVideo classIsActive');
+          console.log('course controler', course)
+    if (course.courseOwner.toString() !== userId) {
+      throw new Error("Course not found (no match user id and owner id)");
+    }
+
+    res
+      .status(200)
+      .json({ message: "✅ Course found :", data: course });
+  } catch (error) {
+    res
+      .status(404)
+      .json({ message: "no se pudo ubicar el curso", data: error.message });
+  }
+};*/}
 
 /*create a course*/
 const create = async (req, res) => {
@@ -99,7 +121,7 @@ const destroy = (req, res) => {
 module.exports = {
   create,
   show,
-  list,
+  listAllCourses,
   update,
   destroy,
 };
