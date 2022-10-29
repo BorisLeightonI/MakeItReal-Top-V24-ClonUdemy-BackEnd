@@ -13,8 +13,8 @@ const UserSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
-      validate: {
+      unique: [true, 'already taken'],
+/*       validate: { //Válido pra SIGNUP, problema para SIGNIN 
         async validator(email) {
           try {
             const user = await models.user.findOne({ email });
@@ -24,7 +24,7 @@ const UserSchema = new Schema(
           }
         },
         message: "There is an user with this email that already exists",
-      },
+      }, */
     },
     password: {
       type: String,
