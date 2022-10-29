@@ -61,6 +61,29 @@ const show = async (req, res) => {
   }
 };*/}
 
+const listUserCourses = async (req, res) => {//////////////////////////////////////
+  try {
+    const userId = req.user;
+    const courses = await Course.find({courseStudents: userId});
+
+    // const user = await User.findById(userId)
+    // const userCourses = user.studentCourses // arreglo de los id de los cursos suscritos
+    // console.log('userCourses', userCourses)
+    // let  myCourses = []// deberia ser arreglo de objetos con llaves del curso
+    // userCourses.map( (item) => {
+    //  Course.findById(item).then(course => {
+    //   myCourses.push(course)
+    // })
+    // })
+    console.log('My Courses:', courses);
+    res.status(200).json({ message: ":white_check_mark: User courses found :", data: courses });
+  } catch (error) {
+    res
+      .status(404)
+      .json({ message: ":x: User courses NOT found ", data: error.message });
+  }
+};
+
 /*create a course*/
 const create = async (req, res) => {
   try {
@@ -80,6 +103,29 @@ const create = async (req, res) => {
       .json({ message: "Curso creado exitosamente", data: course });
   } catch (err) {
     res.status(400).json({ message: "No se pudo crear el curso", data: err });
+  }
+};
+
+const createUserCourses = async (req, res) => {
+  try {
+    const user = await User.findById(req.user);
+    const data = req.body;
+    if (!user) throw new Error("No existe Usuario");
+    const newCourse = {
+      ...data,
+      // courseStudents: user._id,
+    };
+    const course = await Course.create(newCourse);
+    course.courseStudents.push(user._id)
+    await course.save();
+    user.studentCourses.push(course);
+    await user.save();
+
+    res
+      .status(201)
+      .json({ message: "Curso creado exitosamente", data: course });
+  } catch (err) {
+    res.status(400).json({ message: "No se pudo crear el curso", data: err.message });
   }
 };
 
@@ -119,9 +165,9 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  create,
+  create, createUserCourses,
   show,
-  listAllCourses,
+  listAllCourses, listUserCourses,
   update,
   destroy,
 };
