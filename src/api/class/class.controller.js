@@ -2,7 +2,8 @@ const _Class = require('./class.model');
 const Course = require('../course/course.model');
 
 const list = (req, res) => {
-  _Class.find()/* .populate({
+  console.log('class controller, method List')
+  _Class.find({classOfCourse: req.params.courseId})/* .populate({
     path: 'Course',
     select: 'fullName email payment'
   }) */

@@ -23,12 +23,13 @@ const show = async (req, res) => {
     const { courseId } = req.params;
     const userId = req.user;
     console.log('show controller in course','user id:' , userId,'courseId:', courseId )
-
     const course = await Course.findById(courseId).populate('classes', '_id classTitle classDescription classVideo classIsActive');
-          console.log('course controler', course)
-    if (course.courseOwner.toString() !== userId) {
+    console.log('course owner:', course.courseStudents[0])
+    console.log('course controler', course)
+    console.log(course.courseStudents[0].toString()!==userId)
+/*     if (course.courseOwner.toString() !== userId) {
       throw new Error("Course not found (no match user id and owner id)");
-    }
+    } */
 
     res
       .status(200)
