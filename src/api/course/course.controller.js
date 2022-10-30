@@ -3,10 +3,10 @@ const User = require("../user/user.model");
 
 const listAllCourses = (req, res) => {
 
-  Course.find() /* .populate({
+  Course.find().populate({
     path: 'courseOwner',
-    select: 'fullName email payment'
-  }) */
+    select: 'fullName'
+  })
     .then((courses) =>
       res
         .status(200)
