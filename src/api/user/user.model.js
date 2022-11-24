@@ -9,12 +9,13 @@ const UserSchema = new Schema(
     fullName: {
       type: String,
       required: true,
+      match: [/^[A-Z]+$/i, "Full name not validate"],
     },
     email: {
       type: String,
       required: true,
-      unique: [true, 'already taken'],
-/*       validate: { //Válido pra SIGNUP, problema para SIGNIN 
+      match: [/\S+@\S+\.\S+/, "Email not validate"],
+      validate: {
         async validator(email) {
           try {
             const user = await models.user.findOne({ email });
@@ -24,12 +25,13 @@ const UserSchema = new Schema(
           }
         },
         message: "There is an user with this email that already exists",
-      }, */
+      },
     },
     password: {
       type: String,
       required: true,
-      minlength: 3,
+      minlength: 8,
+      maxlength:16,
     },
     avatar: {
       type: String,
