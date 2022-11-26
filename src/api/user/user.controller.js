@@ -5,7 +5,6 @@ const { transporter, welcome } = require('../../utils/mailer');
 
 
 module.exports = {
-/* signup as a student*/
   async signup (req, res) {
     try {
       const { fullName, email, password } = req.body
@@ -25,7 +24,6 @@ module.exports = {
     }
   },
 
-  /* login */
   async login(req, res) {
     try {
       const { email, password } = req.body;
@@ -36,8 +34,7 @@ module.exports = {
       if(!user){
         throw new Error(`invalid credentials`)
       }
-      //validate password
-      //compare 2 arguments 1 password and hashed password
+
       const isValid = await bcrypt.compare( password, user.password);
 
       if(!isValid){
@@ -55,7 +52,7 @@ module.exports = {
       res.status(400).json(`❌user could not login: ${error}`)
     }
   },
-  /* get single user by Id*/
+
   async showSingleUser(req, res) {
     try {
       const user = await User.findById(req.user).populate({//202210252229
@@ -72,7 +69,7 @@ module.exports = {
       res.status(400).json({ message: "❌user is not authenticated", data: error })
     }
   },
-  /*Update user as a instructor*/
+
   async instructorTrue(req, res) {
     try {
       const user = await User.findById(req.user)

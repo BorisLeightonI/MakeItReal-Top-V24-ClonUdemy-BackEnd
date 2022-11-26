@@ -9,7 +9,7 @@ const UserSchema = new Schema(
     fullName: {
       type: String,
       required: true,
-      match: [/^[A-Z]+$/i, "Full name not validate"],
+      match: [/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/, "Full name not validate"],
     },
     email: {
       type: String,
@@ -30,8 +30,6 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minlength: 8,
-      maxlength:16,
     },
     avatar: {
       type: String,
