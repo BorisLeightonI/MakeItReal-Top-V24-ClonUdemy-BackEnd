@@ -5,12 +5,11 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   async signup(req, res) {
     try {
-      const { fullName, email, password } = req.body;
 
-      const encriptedPassord = await bcrypt.hash(password, 11);
+      const encriptedPassord = await bcrypt.hash(req.body.password, 11);
       const user = await User.create({
-        fullName: fullName,
-        email: email,
+        fullName: req.body.fullName,
+        email: req.body.email,
         password: encriptedPassord,
         isInstructor: true,
       });
@@ -18,12 +17,26 @@ module.exports = {
       const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY_JWT, {
         expiresIn: 60 * 60 * 24,
       });
-      res
-        .status(201)
-        .json({
-          message: "✅Instructor created",
-          data: { token, email, fullName },
-        });
+      const {
+        studentCourses,
+        teacherCourses,
+        isInstructor,
+        fullName,
+        avatar,
+        email,
+      } = user;
+      res.status(201).json({
+        message: "✅Instructor created",
+        data: {
+          email,
+          studentCourses,
+          teacherCourses,
+          isInstructor,
+          fullName,
+          avatar,
+          token,
+        },
+      });
     } catch (error) {
       res
         .status(400)
