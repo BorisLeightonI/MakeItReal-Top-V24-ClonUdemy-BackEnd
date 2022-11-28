@@ -1,6 +1,6 @@
 const express = require("express");
-//require("dotenv").config(); /*Solo se usa en Local no en producción*/
-//const morgan = require('morgan'); /*Solo se usa en Local no en producción*/
+require("dotenv").config(); /*Solo se usa en Local no en producción*/
+const morgan = require('morgan'); /*Solo se usa en Local no en producción*/
 const cors = require('cors')
 const { connect } = require("./db")
 const applicationRoutes = require('./routes')
@@ -20,7 +20,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
-//app.use(morgan('dev'))/*Solo se usa en Local no en producción*/
+app.use(morgan('dev'))
 verify(transporter)
 
 applicationRoutes(app)
