@@ -5,24 +5,22 @@ const courseSchema = new Schema(
     title: {
       type: String,
       required: true,
-    },
-    subtitle: {
-      type: String,
-      required: false
+      maxlength: [60, "maximum length of 60"],
     },
     description: {
       type: String,
-      required: true
+      required: false
     },
     language: {
       type: String,
       enum: ['English(US)', 'Spanish(CO)'],
-      default: 'English(US)'
+      default: 'English(US)',
+      required: false,
     },
     level: {
       type: String,
       enum: ['Beginner level', 'Intermediate level', 'Expert level', 'All levels'],
-      default: "All levels"
+      required: false
     },
     category: {
       type: String,
@@ -32,11 +30,12 @@ const courseSchema = new Schema(
         "Design",
         "Marketing",
         "Teaching & Academics",
-      ]
+      ],
+      required: false
     },
     primaryTaught: {
       type: String,
-      required: true
+      required: false
     },
     image: {
       type: String,
