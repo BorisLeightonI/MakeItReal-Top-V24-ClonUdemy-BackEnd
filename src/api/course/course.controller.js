@@ -13,7 +13,7 @@ const listAllCourses = (req, res) => {
     );
 };
 
-//show a course by id
+
 const show = async (req, res) => {
   try {
     const { courseId } = req.params;

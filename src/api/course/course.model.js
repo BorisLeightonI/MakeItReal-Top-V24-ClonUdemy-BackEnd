@@ -7,10 +7,6 @@ const courseSchema = new Schema(
       required: true,
       maxlength: [60, "maximum length of 60"],
     },
-    subtitle: {
-      type: String,
-      required: false
-    },
     description: {
       type: String,
       required: false
@@ -24,7 +20,6 @@ const courseSchema = new Schema(
     level: {
       type: String,
       enum: ['Beginner level', 'Intermediate level', 'Expert level', 'All levels'],
-      default: "All levels",
       required: false
     },
     category: {

@@ -44,7 +44,10 @@ module.exports = {
     try {
       const { email, password } = req.body;
 
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).populate({
+        path: "teacherCourses",
+        select: "title _id ",
+      });
 
       if (!user) {
         throw new Error(`invalid credentials`);
